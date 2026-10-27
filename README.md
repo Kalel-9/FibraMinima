@@ -1,5 +1,8 @@
 # FibraMínima — três ambientes
 
+Versão **1.0.0** · tag Git `v1.0.0` · branch local `desenvolvimento/condominios`.
+Consulte [CHANGELOG.md](CHANGELOG.md) para o histórico.
+
 Conectar todos os blocos a partir de um rack usando a menor quantidade total de cabo.
 Informe preço por metro e distâncias dos trajetos; clique em **Encontrar melhor ligação**.
 
