@@ -24,11 +24,22 @@ class InterfaceTests(unittest.TestCase):
         self.assertFalse(app.exception)
         self.assertEqual(app.metric[0].value, "18 m")
         self.assertEqual(app.metric[1].value, "R$ 180,00")
-        app.number_input[1].set_value(30.0)
+        app.number_input(key="distance_1 — Condomínio pequeno_Rack_A").set_value(30.0)
         app.button[0].click().run()
         self.assertFalse(app.exception)
         self.assertEqual(app.metric[0].value, "33 m")
         self.assertEqual(app.metric[1].value, "R$ 330,00")
+
+    def test_directed_environments(self):
+        from streamlit.testing.v1 import AppTest
+        app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py")).run(timeout=30)
+        for name, total in [("2 — Condomínio médio", "60 m"), ("3 — Condomínio grande", "146 m")]:
+            app.selectbox[0].select(name).run()
+            self.assertFalse(app.exception)
+            self.assertFalse(app.success)
+            app.button[0].click().run()
+            self.assertFalse(app.exception)
+            self.assertEqual(app.metric[0].value, total)
 
 
 if __name__ == "__main__":
